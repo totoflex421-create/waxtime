@@ -6,6 +6,8 @@
   <meta name="theme-color" content="#171512">
   <meta name="description" content="WaxTime — share your listening session and preserve memorable listening moments.">
   <title>WaxTime — Share your listening session</title>
+  <link rel="icon" type="image/png" href="waxtime-logo.png">
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
   <style>
     :root {
       --ink: #171512;
@@ -51,8 +53,7 @@
     .site-header.scrolled { border-color: var(--line); }
     .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
     .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: -.02em; font-size: 1.15rem; }
-    .brand-mark { width: 29px; aspect-ratio: 1; border: 2px solid var(--orange); border-radius: 50%; position: relative; box-shadow: inset 0 0 0 5px var(--ink), inset 0 0 0 7px var(--orange); }
-    .brand-mark::after { content: ""; position: absolute; width: 5px; aspect-ratio: 1; border-radius: 50%; background: var(--cream); inset: 0; margin: auto; }
+    .brand-mark { width: 38px; aspect-ratio: 1; display: block; border-radius: 50%; object-fit: cover; }
     .nav-links { display: flex; align-items: center; gap: 30px; color: var(--muted); font-size: .92rem; }
     .nav-links a:hover, .nav-links a:focus-visible { color: var(--cream); }
     .nav-cta { padding: 10px 16px; color: var(--ink) !important; background: var(--cream); border-radius: 999px; font-weight: 750; }
@@ -104,12 +105,26 @@
     .cta-box { padding: clamp(34px, 7vw, 80px); position: relative; overflow: hidden; border-radius: 32px; color: var(--ink); background: var(--cream); }
     .cta-box::after { content: ""; position: absolute; width: 310px; aspect-ratio: 1; right: -90px; bottom: -150px; border: 48px solid var(--orange); border-radius: 50%; opacity: .9; }
     .cta-box h2 { max-width: 760px; margin: 0 0 16px; font-size: clamp(2.5rem, 5.7vw, 5.2rem); line-height: .94; letter-spacing: -.05em; font-weight: 500; position: relative; z-index: 1; }
-    .cta-box p { max-width: 580px; margin: 0 0 30px; color: #655d52; position: relative; z-index: 1; }
-    .waitlist { max-width: 580px; display: flex; gap: 10px; position: relative; z-index: 2; }
-    .waitlist input { width: 100%; min-width: 0; padding: 14px 18px; border: 1px solid #bfb3a0; border-radius: 999px; color: var(--ink); background: rgba(255,255,255,.45); outline: none; }
-    .waitlist input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(230,107,50,.18); }
-    .waitlist .button { color: var(--cream); background: var(--ink); border-color: var(--ink); white-space: nowrap; }
-    .form-message { min-height: 1.5em; margin-top: 12px !important; font-weight: 700; color: #78512f !important; }
+    .cta-box > p { max-width: 650px; margin: 0 0 30px; color: #655d52; position: relative; z-index: 1; }
+    .brevo-wrap { max-width: 660px; position: relative; z-index: 2; }
+    .brevo-wrap .sib-form { padding: 0; text-align: left; background: transparent; }
+    .brevo-wrap .sib-form-container, .brevo-wrap #sib-container { max-width: none !important; margin: 0; padding: 0; border: 0; background: transparent; }
+    .brevo-wrap .sib-form-block { padding: 0; }
+    .brevo-wrap .form-row { margin-top: 18px; }
+    .brevo-wrap .entry__label { display: block; margin-bottom: 7px; color: var(--ink); font-size: .92rem; font-weight: 750; }
+    .brevo-wrap .entry__field { border: 0; background: transparent; }
+    .brevo-wrap .entry__field input { width: 100%; min-width: 0; padding: 14px 18px; border: 1px solid #bfb3a0; border-radius: 999px; color: var(--ink); background: rgba(255,255,255,.55); outline: none; }
+    .brevo-wrap .entry__field input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(230,107,50,.18); }
+    .brevo-wrap .entry__specification { display: block; margin-top: 7px; color: #655d52; font-size: .76rem; }
+    .brevo-wrap .entry__choice label { display: grid; grid-template-columns: 24px 1fr; align-items: start; gap: 8px; color: #4e483f; cursor: pointer; }
+    .brevo-wrap .entry__choice p { margin: 1px 0 0; font-size: .86rem; line-height: 1.45; }
+    .brevo-wrap .privacy-note { margin: 18px 0; color: #655d52; font-size: .76rem; }
+    .brevo-wrap .privacy-note a { color: #8d421f; text-decoration: underline; }
+    .brevo-wrap .sib-form-block__button { min-height: 52px; padding: 0 23px; border: 0; border-radius: 999px; color: var(--cream); background: var(--ink); font-weight: 800; cursor: pointer; }
+    .brevo-wrap .sib-form-message-panel { max-width: 660px !important; margin: 0 0 18px; border-radius: 12px !important; }
+    .brevo-wrap .entry__error { border-radius: 8px !important; }
+    .brevo-wrap .input--hidden { display: none; }
+    .brevo-wrap .captcha-row { margin-top: 20px; }
 
     footer { padding: 34px 0 45px; border-top: 1px solid var(--line); color: var(--muted); }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
@@ -134,13 +149,13 @@
       .hero-actions .button, .hero-actions .text-link { width: 100%; text-align: center; }
       .art { min-height: 470px; }
       .record { width: 390px; left: -120px; }
-      .phone { width: 250px; min-height: 485px; }
+      .phone { width: 245px; min-height: 485px; margin-right: 6px; }
       .screen { min-height: 461px; padding: 50px 16px 18px; }
       .cover { margin: 12px 0 16px; }
       .pressing { margin-top: 13px; }
       .section, .cta { padding-block: 78px; }
-      .waitlist { flex-direction: column; }
-      .waitlist .button { width: 100%; }
+      .cta-box { padding: 28px 24px; }
+      .brevo-wrap .sib-form-block__button { width: 100%; text-align: center; }
       .cta-box::after { opacity: .35; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
@@ -149,7 +164,7 @@
 <body>
   <header class="site-header" id="top">
     <nav class="nav wrap" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="WaxTime home"><span class="brand-mark" aria-hidden="true"></span>WaxTime</a>
+      <a class="brand" href="#top" aria-label="WaxTime home"><img class="brand-mark" src="waxtime-logo.png" alt="">WaxTime</a>
       <div class="nav-links">
         <a href="#idea">The Idea</a>
         <a href="#features">Features</a>
@@ -216,14 +231,73 @@
     <section class="cta" id="waitlist">
       <div class="wrap">
         <div class="cta-box">
-          <h2 class="serif">Be there when the needle drops.</h2>
-          <p>WaxTime is taking shape. Join the list and be among the first to know when the initial test version is ready.</p>
-          <form class="waitlist" id="waitlist-form">
-            <label for="email" hidden>Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
-            <button class="button" type="submit">Save My Spot</button>
-          </form>
-          <p class="form-message" id="form-message" aria-live="polite"></p>
+          <h2 class="serif">Join the first WaxTime listening circle.</h2>
+          <p>Get early access, shape the first version and help us build a quieter place for album lovers.</p>
+          <div class="brevo-wrap">
+            <div class="sib-form">
+              <div id="sib-form-container" class="sib-form-container">
+                <div id="error-message" class="sib-form-message-panel" role="alert">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <span class="sib-form-message-panel__inner-text">Something went wrong. Please try again in a moment.</span>
+                  </div>
+                </div>
+                <div id="success-message" class="sib-form-message-panel" role="status">
+                  <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                    <span class="sib-form-message-panel__inner-text">Check your inbox to confirm your place in the WaxTime listening circle. Your subscription is only complete after you click the confirmation link.</span>
+                  </div>
+                </div>
+                <div id="sib-container" class="sib-container--large sib-container--vertical">
+                  <form id="sib-form" method="POST" action="https://56fb5e49.sibforms.com/serve/MUIFALMmfuHPUTactBIihkrOicWHHp-ZWrLUWzcEFw3vQwJnnXsyLF28eSIEwxK6KsEi4Ycm-UMV_YFZjVdtSN8y1x4edZ-W_Ic8ZbrV_fHy6Gkk2xFmcRl7wJW3vfhKqyZ-wGQUvMvkmEfcxHMhY25C8y6n1XqQ0eZlw1c0LkYeWARifiQCXVFsu83OiJDqDoCMLaPHGLNkRhcg-g==" data-type="subscription">
+                    <div class="sib-input sib-form-block form-row">
+                      <div class="form__entry entry_block">
+                        <div class="form__label-row">
+                          <label class="entry__label" for="EMAIL" data-required="*">Enter your email address</label>
+                          <div class="entry__field"><input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" placeholder="you@example.com" data-required="true" required></div>
+                        </div>
+                        <label class="entry__error entry__error--primary"></label>
+                        <label class="entry__specification">We’ll only send occasional updates about WaxTime.</label>
+                      </div>
+                    </div>
+
+                    <div class="sib-optin sib-form-block form-row" data-required="true">
+                      <div class="form__entry entry_mcq">
+                        <div class="form__label-row">
+                          <div class="entry__choice">
+                            <label>
+                              <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" required>
+                              <span class="checkbox checkbox_tick_positive"></span>
+                              <span><p>I agree to receive occasional product updates and early-access information from WaxTime. I can unsubscribe at any time.</p></span>
+                            </label>
+                          </div>
+                        </div>
+                        <label class="entry__error entry__error--primary"></label>
+                      </div>
+                    </div>
+
+                    <p class="privacy-note">WaxTime uses Brevo to process and store your subscription data. Learn more in our <a href="privacy.html">Privacy Policy</a> and the <a target="_blank" href="https://www.brevo.com/legal/privacypolicy/" rel="nofollow noopener">Brevo Privacy Policy</a>.</p>
+
+                    <div class="sib-captcha sib-form-block captcha-row">
+                      <div class="form__entry entry_block">
+                        <div class="form__label-row">
+                          <div class="cf-turnstile g-recaptcha" data-sitekey="0x4AAAAAAEEa_bxfETv_iKj0" id="sib-captcha" data-callback="handleCaptchaResponse" data-language="en"></div>
+                        </div>
+                        <label class="entry__error entry__error--primary"></label>
+                      </div>
+                    </div>
+
+                    <div class="sib-form-block form-row">
+                      <button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
+                        <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" aria-hidden="true"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"></path></svg>
+                        Join the Listening Circle
+                      </button>
+                    </div>
+                    <input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off">
+                    <input type="hidden" name="locale" value="en">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -231,24 +305,33 @@
 
   <footer>
     <div class="footer-inner wrap">
-      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>WaxTime</a>
-      <div class="footer-links"><span>© <span id="year"></span> WaxTime</span><a href="mailto:hello@waxtime.app">Contact</a><a href="#top">Back to top ↑</a></div>
+      <a class="brand" href="#top"><img class="brand-mark" src="waxtime-logo.png" alt="">WaxTime</a>
+      <div class="footer-links"><span>© <span id="year"></span> WaxTime</span><a href="mailto:hello@waxtime.app">Contact</a><a href="imprint.html">Imprint</a><a href="privacy.html">Privacy</a><a href="#top">Back to top ↑</a></div>
     </div>
   </footer>
 
   <script>
     const header = document.querySelector('.site-header');
-    const form = document.querySelector('#waitlist-form');
-    const message = document.querySelector('#form-message');
     document.querySelector('#year').textContent = new Date().getFullYear();
     addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 10), { passive: true });
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const email = new FormData(form).get('email');
-      localStorage.setItem('waxtime-waitlist-email', email);
-      message.textContent = 'Thank you! For this preview, your address has been saved on this device.';
-      form.reset();
-    });
+
+    function handleCaptchaResponse() {
+      document.getElementById('sib-captcha').dispatchEvent(new Event('captchaChange'));
+      window.grecaptcha = window.turnstile;
+    }
+
+    window.REQUIRED_CODE_ERROR_MESSAGE = 'Please select a country code.';
+    window.LOCALE = 'en';
+    window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = 'Please enter a valid email address.';
+    window.REQUIRED_ERROR_MESSAGE = 'Please enter your email address and confirm your consent.';
+    window.GENERIC_INVALID_MESSAGE = 'Please enter a valid email address.';
+    window.INVALID_NUMBER = 'Please enter a valid number.';
+    window.INVALID_DATE = 'Please enter a valid date.';
+    window.REQUIRED_MULTISELECT_MESSAGE = 'Please select at least one option.';
+    window.translation = { common: { selectedList: '{quantity} list selected', selectedLists: '{quantity} lists selected', selectedOption: '{quantity} selected', selectedOptions: '{quantity} selected' } };
+    var AUTOHIDE = Boolean(0);
   </script>
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 </html>
